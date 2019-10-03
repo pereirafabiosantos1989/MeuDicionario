@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj": {}
+    "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj": {}
   },
   "projects": {
-    "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj": {
+    "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj",
+        "projectUniqueName": "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj",
         "projectName": "MeuDicionario.Android",
-        "projectPath": "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj",
+        "projectPath": "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario.Android\\MeuDicionario.Android.csproj",
         "packagesPath": "C:\\Users\\perei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario.Android\\obj\\",
+        "outputPath": "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -32,8 +32,8 @@
         "frameworks": {
           "monoandroid90": {
             "projectReferences": {
-              "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj": {
-                "projectPath": "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj"
+              "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj": {
+                "projectPath": "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj"
               }
             }
           }
@@ -77,19 +77,23 @@
             "Xamarin.Forms": {
               "target": "Package",
               "version": "[4.1.0.555618, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.6.292, )"
             }
           }
         }
       }
     },
-    "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj": {
+    "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj",
+        "projectUniqueName": "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj",
         "projectName": "MeuDicionario",
-        "projectPath": "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj",
+        "projectPath": "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario\\MeuDicionario.csproj",
         "packagesPath": "C:\\Users\\perei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\perei\\Desktop\\MeuDicionario_Android\\MeuDicionario\\MeuDicionario\\obj\\",
+        "outputPath": "C:\\Users\\perei\\Documents\\Projetos\\MeuDicionario\\MeuDicionario\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -134,6 +138,10 @@
             "Xamarin.Forms": {
               "target": "Package",
               "version": "[4.1.0.555618, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.6.292, )"
             }
           },
           "imports": [
