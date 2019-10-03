@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MeuDicionario.MainPage">
+
+    <CarouselPage.Children>
+        
+        <ContentPage>
+            <StackLayout Orientation="Vertical" Margin="10,10">
+                
+                <Label Text="Cadastro" 
+                       FontSize="Title" TextColor="Black"/>
+
+                <Entry Placeholder="Informe a palavra" Keyboard="Default" x:Name="txtPalavra"/>
+                <Entry Placeholder="Informe a tradução" Keyboard="Default" x:Name="txtTraducao"/>
+
+                <Button Text="Gravar" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </ContentPage>
+        
+        <ContentPage Appearing="ContentPage_Appearing">
+            <StackLayout Orientation="Vertical" Margin="10,10">
+                
+                <Label Text="Pesquisa e tradução"
+                       FontSize="Title" TextColor="Black"/>
+
+                <SearchBar Placeholder="Pesquisar" x:Name="txtPesquisa" SearchButtonPressed="TxtPesquisa_SearchButtonPressed"/>
+
+                <ListView x:Name="listDicionario" SelectionMode="Single" 
+                          SeparatorColor="Transparent" RefreshControlColor="Transparent" InputTransparent="True"/>
+
+            </StackLayout>
+        </ContentPage>
+        
+    </CarouselPage.Children>
+
+</CarouselPage>
