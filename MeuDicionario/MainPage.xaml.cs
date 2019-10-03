@@ -1,6 +1,8 @@
 ﻿using MeuDicionario.Enum;
+using MeuDicionario.Interfaces;
 using MeuDicionario.Modelo;
 using MeuDicionario.ViewModel;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,11 +22,33 @@ namespace MeuDicionario
         List<Dicionario> dicionario = new List<Dicionario>();
         List<string> resultadoPesquisa = new List<string>();
 
+        private SQLiteAsyncConnection _contexto;
+
         public MainPage()
         {
             InitializeComponent();
 
             listDicionario.ItemsSource = dicionario;
+
+            _contexto = DependencyService.Get<IConexao>().RetornaConexao();
+        }
+
+        public void LimparCampos()
+        {
+            txtPalavra.Text =
+            txtTraducao.Text = string.Empty;
+        }
+
+        public async void GravarNovaTraducao()
+        {
+            Dicionario novoItem = new Dicionario();
+            novoItem.Palavra = txtPalavra.Text;
+            novoItem.Traducao = txtTraducao.Text;
+            novoItem.Idioma = EnumIdiomas.Alemao;
+
+            await _contexto.InsertAsync(novoItem);
+            await DisplayAlert("Dicionário", $"A palavra {palavra.ToUpper()} foi adicionada ao dicionário.", "OK");
+            LimparCampos();
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -38,17 +62,18 @@ namespace MeuDicionario
                 return;
             }
 
-            dicionario.Add(new Dicionario()
-            {
-                Palavra = txtPalavra.Text,
-                Traducao = txtTraducao.Text,
-                Idioma = EnumIdiomas.Frances //adicionar campo na interface
-            });
+            GravarNovaTraducao();
+        }
 
-            await DisplayAlert("Dicionário", $"A palavra {palavra.ToUpper()} foi adicionada ao dicionário.", "OK");
+        protected override void OnAppearing()
+        {
+            /* cria a tabela */
+            _contexto.CreateTableAsync<Dicionario>();
 
-            txtPalavra.Text =
-            txtTraducao.Text = string.Empty;
+            /* lista os dados do dicionário */
+            var dados = _contexto.Table<Dicionario>().ToListAsync();
+
+            base.OnAppearing();
         }
 
         private void ContentPage_Appearing(object sender, EventArgs e)
