@@ -5,13 +5,13 @@ using System.Text;
 
 namespace MeuDicionario.ViewModel
 {
-    public class DicionarioViewModel
+    public class DicionarioViewModel //: INotifyPropertyChanged
     {
-        List<Dicionario> dicionario;
+        public List<Dicionario> dicionario = new List<Dicionario>();
 
         public DicionarioViewModel()
         {
-            dicionario = new List<Dicionario>();
+
         }
     }
 }

@@ -19,7 +19,7 @@ namespace MeuDicionario
     public partial class MainPage : CarouselPage
     {
         /* As palavras e sua tradução */
-        List<Dicionario> dicionario = new List<Dicionario>();
+        List<Dicionario> dicionario;
         List<string> resultadoPesquisa = new List<string>();
 
         private SQLiteAsyncConnection _contexto;
@@ -28,23 +28,24 @@ namespace MeuDicionario
         {
             InitializeComponent();
 
-            listDicionario.ItemsSource = dicionario;
-
             _contexto = DependencyService.Get<IConexao>().RetornaConexao();
+
+            labelNenhumResultado.IsVisible = false;
         }
 
         public void LimparCampos()
         {
             txtPalavra.Text =
             txtTraducao.Text = string.Empty;
+            idiomaSelecionado.SelectedIndex = -1;
         }
 
-        public async void GravarNovaTraducao()
+        public async void GravarNovaTraducao(string palavra)
         {
             Dicionario novoItem = new Dicionario();
             novoItem.Palavra = txtPalavra.Text;
             novoItem.Traducao = txtTraducao.Text;
-            novoItem.Idioma = EnumIdiomas.Alemao;
+            novoItem.Idioma = idiomaSelecionado.SelectedItem.ToString();
 
             await _contexto.InsertAsync(novoItem);
             await DisplayAlert("Dicionário", $"A palavra {palavra.ToUpper()} foi adicionada ao dicionário.", "OK");
@@ -55,6 +56,7 @@ namespace MeuDicionario
         {
             string palavra = txtPalavra.Text;
             string traducao = txtTraducao.Text;
+            string idioma = idiomaSelecionado.SelectedItem.ToString();
 
             if (string.IsNullOrEmpty(palavra) || string.IsNullOrEmpty(traducao))
             {
@@ -62,41 +64,49 @@ namespace MeuDicionario
                 return;
             }
 
-            GravarNovaTraducao();
+            GravarNovaTraducao(palavra);
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             /* cria a tabela */
-            _contexto.CreateTableAsync<Dicionario>();
+            await _contexto.CreateTableAsync<Dicionario>();
 
             /* lista os dados do dicionário */
-            var dados = _contexto.Table<Dicionario>().ToListAsync();
+            dicionario = await _contexto.Table<Dicionario>().ToListAsync();
 
             base.OnAppearing();
+
+            labelNenhumResultado.IsVisible = false;
         }
 
-        private void ContentPage_Appearing(object sender, EventArgs e)
+        private async void ContentPage_Appearing(object sender, EventArgs e)
         {
-            listDicionario.ItemsSource = resultadoPesquisa;
+            dicionario = await _contexto.Table<Dicionario>().ToListAsync();
+            listDicionario.ItemsSource = dicionario;
+
+            labelNenhumResultado.IsVisible = false;
         }
 
-        private void TxtPesquisa_SearchButtonPressed(object sender, EventArgs e)
+        private async void TxtPesquisa_SearchButtonPressed(object sender, EventArgs e)
         {
-            List<string> exibir = new List<string>();
+            dicionario = await _contexto.Table<Dicionario>().Where(x => x.Palavra.Contains(txtPesquisa.Text)).ToListAsync();
+            listDicionario.ItemsSource = dicionario;
 
-            try
+            if (dicionario.Count == 0)
             {
-                Dicionario resultado = dicionario.Where(x => x.Palavra.Contains(txtPesquisa.Text)).First();
-
-                exibir.Add(resultado.Traducao);
+                labelNenhumResultado.IsVisible = true;
             }
-            catch (InvalidOperationException)
+            else
             {
-                exibir.Add("Nenhuma tradução encontrada");
+                labelNenhumResultado.IsVisible = false;
             }
+        }
 
-            listDicionario.ItemsSource = exibir;
+        private void ListDicionario_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Editar editar = new Editar(e.SelectedItem as Dicionario);
+            this.Navigation.PushModalAsync(editar);
         }
     }
 }

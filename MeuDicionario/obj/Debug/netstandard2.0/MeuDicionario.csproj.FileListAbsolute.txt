@@ -21,3 +21,5 @@ C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstand
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.AssemblyInfo.cs
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.pdb
+C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\Editar.xaml.g.cs

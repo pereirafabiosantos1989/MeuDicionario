@@ -12,6 +12,6 @@ namespace MeuDicionario.Modelo
         public int ID { get; set; }
         public string Palavra { get; set; }
         public string Traducao { get; set; }
-        public EnumIdiomas Idioma { get; set; }
+        public string Idioma { get; set; }
     }
 }
