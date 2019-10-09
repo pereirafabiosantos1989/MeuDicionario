@@ -31,13 +31,15 @@ namespace MeuDicionario
             _contexto = DependencyService.Get<IConexao>().RetornaConexao();
 
             labelNenhumResultado.IsVisible = false;
+            gridResultadoPesquisa.IsVisible = false;
+            idiomaSelecionado.SelectedIndex = 0;
         }
 
         public void LimparCampos()
         {
             txtPalavra.Text =
             txtTraducao.Text = string.Empty;
-            idiomaSelecionado.SelectedIndex = -1;
+            idiomaSelecionado.SelectedIndex = 0;
         }
 
         public async void GravarNovaTraducao(string palavra)
@@ -83,30 +85,41 @@ namespace MeuDicionario
         private async void ContentPage_Appearing(object sender, EventArgs e)
         {
             dicionario = await _contexto.Table<Dicionario>().ToListAsync();
-            listDicionario.ItemsSource = dicionario;
+            //listDicionario.ItemsSource = dicionario;
 
             labelNenhumResultado.IsVisible = false;
         }
 
         private async void TxtPesquisa_SearchButtonPressed(object sender, EventArgs e)
         {
-            dicionario = await _contexto.Table<Dicionario>().Where(x => x.Palavra.Contains(txtPesquisa.Text)).ToListAsync();
-            listDicionario.ItemsSource = dicionario;
+            dicionario = await _contexto.Table<Dicionario>().Where(x => x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text)).ToListAsync();
+            //listDicionario.ItemsSource = dicionario;
 
             if (dicionario.Count == 0)
             {
                 labelNenhumResultado.IsVisible = true;
+                gridResultadoPesquisa.IsVisible = false;
             }
             else
             {
                 labelNenhumResultado.IsVisible = false;
+                gridResultadoPesquisa.IsVisible = true;
+
+                txtPalavraPesquisa.Text = dicionario.First().Palavra;
+                txtTraducaoPesquisa.Text = dicionario.First().Traducao;
+                txtIdiomaPesquisa.Text = dicionario.First().Idioma;
             }
         }
 
         private void ListDicionario_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            Editar editar = new Editar(e.SelectedItem as Dicionario);
-            this.Navigation.PushModalAsync(editar);
+            //Dicionario dic = e.SelectedItem as Dicionario;
+
+            //txtPalavraPesquisa.Text = dic.Palavra;
+            //txtTraducaoPesquisa.Text = dic.Traducao;
+            //txtIdiomaPesquisa.Text = dic.Idioma;
+
+            //listDicionario.BackgroundColor = Color.Transparent;
         }
     }
 }

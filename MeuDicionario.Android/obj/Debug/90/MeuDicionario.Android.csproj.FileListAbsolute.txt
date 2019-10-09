@@ -502,7 +502,6 @@ C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\bin\Debug\
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\bin\Debug\com.companyname.meudicionario-Signed.apk
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\bin\Debug\MeuDicionario.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\bin\Debug\MeuDicionario.pdb
-C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\bin\Debug\MeuDicionario.dll.mdb
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\MonoAndroid,Version=v9.0.AssemblyAttributes.cs
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\build.props
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\adb.props
@@ -658,12 +657,12 @@ C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\FormsViewGroup.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\FormsViewGroup.pdb
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\Java.Interop.dll
+C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\machine.config
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\MeuDicionario.Android.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\MeuDicionario.Android.pdb
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\MeuDicionario.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\MeuDicionario.dll.mdb
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\Mono.Android.dll
-C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\Mono.Android.pdb
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\Mono.Security.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\mscorlib.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\netstandard.dll
@@ -749,7 +748,6 @@ C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\Xamarin.Forms.Xaml.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\Xamarin.Forms.Xaml.pdb
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\src\mono\MonoRuntimeProvider.java
-C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\assets\machine.config
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\android\bin\mono.android.jar
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\static.flag
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\buildid.txt
@@ -1026,3 +1024,4 @@ C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario.Android\bin\Debug\MeuDicionario.dll.mdb
