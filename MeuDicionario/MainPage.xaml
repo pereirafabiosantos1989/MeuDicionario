@@ -68,21 +68,35 @@
                     <Label x:Name="txtIdiomaPesquisa" TextColor="Blue" FontAttributes="Bold" Grid.Row="2" Grid.Column="1"/>
                 </Grid>
 
-                <!--<ListView x:Name="listDicionario" ItemSelected="ListDicionario_ItemSelected" Margin="0,20,0,0">
+                <ListView x:Name="listDicionario" ItemSelected="ListDicionario_ItemSelected" Margin="0,20,0,0" RowHeight="60">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-                                    <Label Text="Palavra: " FontAttributes="Bold"/>
-                                    <Label Text="{Binding Palavra}" TextColor="Blue"/>
-                                    <Label Text="Tradução: " FontAttributes="Bold"/>
-                                    <Label Text="{Binding Traducao}" TextColor="Blue"/>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Apagar" IsDestructive="True" Clicked="MenuItem_Clicked" CommandParameter="{Binding .}"/>
+                                </ViewCell.ContextActions>
+                                
+                                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="White">
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Palavra: " FontAttributes="Bold"/>
+                                        <Label Text="{Binding Palavra}" TextColor="Blue" WidthRequest="120"/>
+                                        
+                                        <Label Text="Tradução: " FontAttributes="Bold"/>
+                                        <Label Text="{Binding Traducao}" TextColor="Blue"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Idioma: " FontAttributes="Bold"/>
+                                        <Label Text="{Binding Idioma}" TextColor="Blue"/>
+                                    </StackLayout>
+
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>-->
+                </ListView>
 
             </StackLayout>
         </ContentPage>

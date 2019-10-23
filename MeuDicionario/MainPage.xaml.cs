@@ -82,18 +82,30 @@ namespace MeuDicionario
             labelNenhumResultado.IsVisible = false;
         }
 
-        private async void ContentPage_Appearing(object sender, EventArgs e)
+        private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            dicionario = await _contexto.Table<Dicionario>().ToListAsync();
-            //listDicionario.ItemsSource = dicionario;
+            ListarItens();
+        }
+
+        public async void ListarItens()
+        {
+            dicionario = await _contexto.Table<Dicionario>()
+                                        .OrderBy(x => x.Idioma)
+                                        .ToListAsync();
+
+            listDicionario.ItemsSource = dicionario;
 
             labelNenhumResultado.IsVisible = false;
         }
 
         private async void TxtPesquisa_SearchButtonPressed(object sender, EventArgs e)
         {
-            dicionario = await _contexto.Table<Dicionario>().Where(x => x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text)).ToListAsync();
-            //listDicionario.ItemsSource = dicionario;
+            dicionario = await _contexto.Table<Dicionario>()
+                                         .Where(x => x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text))
+                                         .OrderBy(x => x.Idioma)
+                                         .ToListAsync();
+
+            listDicionario.ItemsSource = dicionario;
 
             if (dicionario.Count == 0)
             {
@@ -120,6 +132,22 @@ namespace MeuDicionario
             //txtIdiomaPesquisa.Text = dic.Idioma;
 
             //listDicionario.BackgroundColor = Color.Transparent;
+        }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            MenuItem item = (MenuItem) sender;
+            
+            Dicionario itemSelecionado = item.CommandParameter as Dicionario;
+
+            bool apagarItem = await DisplayAlert("Apagar item", $"Deseja apagar o item '{itemSelecionado.Palavra}'?", "Sim", "Não");
+
+            if (apagarItem)
+            {
+                await _contexto.DeleteAsync(itemSelecionado);
+            }
+
+            ListarItens();
         }
     }
 }
