@@ -116,10 +116,6 @@ namespace MeuDicionario
             {
                 labelNenhumResultado.IsVisible = false;
                 gridResultadoPesquisa.IsVisible = true;
-
-                txtPalavraPesquisa.Text = dicionario.First().Palavra;
-                txtTraducaoPesquisa.Text = dicionario.First().Traducao;
-                txtIdiomaPesquisa.Text = dicionario.First().Idioma;
             }
         }
 
@@ -148,6 +144,12 @@ namespace MeuDicionario
             }
 
             ListarItens();
+        }
+
+        private void ListDicionario_Refreshing(object sender, EventArgs e)
+        {
+            ListarItens();
+            listDicionario.IsRefreshing = false;
         }
     }
 }

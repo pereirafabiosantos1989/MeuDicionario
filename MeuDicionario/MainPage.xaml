@@ -58,17 +58,11 @@
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
                     
-                    <Label Text="Palavra: " TextColor="Black" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                    <Label x:Name="txtPalavraPesquisa" TextColor="Blue" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
-
-                    <Label Text="Tradução: " TextColor="Black" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                    <Label x:Name="txtTraducaoPesquisa" TextColor="Blue" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"/>
-
-                    <Label Text="Idioma: " TextColor="Black" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                    <Label x:Name="txtIdiomaPesquisa" TextColor="Blue" FontAttributes="Bold" Grid.Row="2" Grid.Column="1"/>
                 </Grid>
 
-                <ListView x:Name="listDicionario" ItemSelected="ListDicionario_ItemSelected" Margin="0,20,0,0" RowHeight="60">
+                <ListView x:Name="listDicionario" ItemSelected="ListDicionario_ItemSelected" Margin="0,20,0,0" 
+                          RowHeight="60" 
+                          Refreshing="ListDicionario_Refreshing" IsPullToRefreshEnabled="True">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -80,15 +74,15 @@
                                 <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="White">
 
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="Palavra: " FontAttributes="Bold"/>
-                                        <Label Text="{Binding Palavra}" TextColor="Blue" WidthRequest="120"/>
+                                        <Label Text="Palavra: " FontAttributes="Bold" WidthRequest="80"/>
+                                        <Label Text="{Binding Palavra}" TextColor="Blue" WidthRequest="90"/>
                                         
-                                        <Label Text="Tradução: " FontAttributes="Bold"/>
+                                        <Label Text="Tradução: " FontAttributes="Bold" WidthRequest="100"/>
                                         <Label Text="{Binding Traducao}" TextColor="Blue"/>
                                     </StackLayout>
 
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="Idioma: " FontAttributes="Bold"/>
+                                        <Label Text="Idioma: " FontAttributes="Bold" WidthRequest="80"/>
                                         <Label Text="{Binding Idioma}" TextColor="Blue"/>
                                     </StackLayout>
 
