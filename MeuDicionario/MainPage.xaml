@@ -1,18 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:viewmodel="clr-namespace:MeuDicionario.ViewModel"
               mc:Ignorable="d" x:Class="MeuDicionario.MainPage">
 
-    <CarouselPage.BindingContext>
-        <viewmodel:DicionarioViewModel/>
-    </CarouselPage.BindingContext>
-    
-    <CarouselPage.Children>
+    <TabbedPage.Children>
         
-        <ContentPage>
+        <ContentPage Title="Cadastro">
             <StackLayout Orientation="Vertical" Margin="10,10">
                 
                 <Label Text="Cadastro" 
@@ -34,37 +30,46 @@
             </StackLayout>
         </ContentPage>
         
-        <ContentPage Appearing="ContentPage_Appearing">
-            <StackLayout Orientation="Vertical" Margin="10,10">
-                
-                <Label Text="Pesquisa e tradução"
-                       FontSize="Title" TextColor="Black"/>
+        <ContentPage Appearing="ContentPage_Appearing" Title="Pesquisa">
 
-                <SearchBar Placeholder="Pesquisar palavra" 
-                           x:Name="txtPesquisa" SearchButtonPressed="TxtPesquisa_SearchButtonPressed"/>
+            <StackLayout Orientation="Vertical" Margin="10,10">
+
+                <StackLayout Orientation="Horizontal">
+                    
+                    <CheckBox CheckedChanged="CheckBox_CheckedChanged" x:Name="checkFiltroPorIdioma"/>
+
+                    <Label Text="Filtrar por idioma" VerticalOptions="Center"
+                           FontSize="20" TextColor="Black"/>
+                    
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="10,10">
+
+                    <Picker x:Name="idiomaParaPesquisa" IsVisible="False" WidthRequest="250">
+                        <Picker.Items>
+                            <x:String>Selecione um idioma</x:String>
+                            <x:String>Inglês</x:String>
+                            <x:String>Alemão</x:String>
+                            <x:String>Françês</x:String>
+                            <x:String>Grego</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                </StackLayout>
+
+
+                <SearchBar Placeholder="Termo a pesquisar"
+                           x:Name="txtPesquisa" SearchButtonPressed="TxtPesquisa_SearchButtonPressed" />
                 
                 <Label Text="Nenhum resultado encontrado" 
                        FontSize="Subtitle" x:Name="labelNenhumResultado" FontAttributes="Bold"/>
 
-                <Grid x:Name="gridResultadoPesquisa">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                    </Grid.RowDefinitions>
-                    
-                </Grid>
-
                 <ListView x:Name="listDicionario" ItemSelected="ListDicionario_ItemSelected" Margin="0,20,0,0" 
-                          RowHeight="60" 
+                          RowHeight="60" HeightRequest="300"
                           Refreshing="ListDicionario_Refreshing" IsPullToRefreshEnabled="True">
 
                     <ListView.ItemTemplate>
+                        
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.ContextActions>
@@ -95,6 +100,6 @@
             </StackLayout>
         </ContentPage>
         
-    </CarouselPage.Children>
+    </TabbedPage.Children>
 
-</CarouselPage>
+</TabbedPage>

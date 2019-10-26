@@ -16,7 +16,7 @@ namespace MeuDicionario
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class MainPage : CarouselPage
+    public partial class MainPage : TabbedPage
     {
         /* As palavras e sua tradução */
         List<Dicionario> dicionario;
@@ -31,8 +31,10 @@ namespace MeuDicionario
             _contexto = DependencyService.Get<IConexao>().RetornaConexao();
 
             labelNenhumResultado.IsVisible = false;
-            gridResultadoPesquisa.IsVisible = false;
+
+            /* inicializa os pickers */
             idiomaSelecionado.SelectedIndex = 0;
+            idiomaParaPesquisa.SelectedIndex = 0;
         }
 
         public void LimparCampos()
@@ -71,8 +73,9 @@ namespace MeuDicionario
 
         protected async override void OnAppearing()
         {
-            /* cria a tabela */
+            /* cria as tabelas se ainda não existirem */
             await _contexto.CreateTableAsync<Dicionario>();
+            await _contexto.CreateTableAsync<Licao>();
 
             /* lista os dados do dicionário */
             dicionario = await _contexto.Table<Dicionario>().ToListAsync();
@@ -100,34 +103,50 @@ namespace MeuDicionario
 
         private async void TxtPesquisa_SearchButtonPressed(object sender, EventArgs e)
         {
-            dicionario = await _contexto.Table<Dicionario>()
-                                         .Where(x => x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text))
-                                         .OrderBy(x => x.Idioma)
-                                         .ToListAsync();
+            if (!checkFiltroPorIdioma.IsChecked)
+            {
+                /* Pesquisa por palavra ou tradução (sem filtro de idioma) */
+                dicionario = await _contexto.Table<Dicionario>()
+                                             .Where(x => x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text))
+                                             .OrderBy(x => x.Idioma)
+                                             .ToListAsync();
+            }
+            else
+            {
+                string idiomaSelecionado = idiomaParaPesquisa.SelectedItem.ToString();
+
+                if (idiomaParaPesquisa.SelectedIndex == 0)
+                {
+                    await DisplayAlert("Dicionário", "É necessário informar um idioma para o filtro de resultado.", "Cancelar");
+                    return;
+                }
+                else
+                {
+
+                    /* Pesquisa pelo idioma */
+
+                    dicionario = await _contexto.Table<Dicionario>()
+                                                 .Where(x => (x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text)) && x.Idioma.Equals(idiomaSelecionado))
+                                                 .OrderBy(x => x.Palavra)
+                                                 .ToListAsync();
+                }
+            }
 
             listDicionario.ItemsSource = dicionario;
 
             if (dicionario.Count == 0)
             {
                 labelNenhumResultado.IsVisible = true;
-                gridResultadoPesquisa.IsVisible = false;
             }
             else
             {
                 labelNenhumResultado.IsVisible = false;
-                gridResultadoPesquisa.IsVisible = true;
             }
         }
 
         private void ListDicionario_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //Dicionario dic = e.SelectedItem as Dicionario;
-
-            //txtPalavraPesquisa.Text = dic.Palavra;
-            //txtTraducaoPesquisa.Text = dic.Traducao;
-            //txtIdiomaPesquisa.Text = dic.Idioma;
-
-            //listDicionario.BackgroundColor = Color.Transparent;
+            
         }
 
         private async void MenuItem_Clicked(object sender, EventArgs e)
@@ -150,6 +169,18 @@ namespace MeuDicionario
         {
             ListarItens();
             listDicionario.IsRefreshing = false;
+        }
+
+        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (checkFiltroPorIdioma.IsChecked)
+            {
+                idiomaParaPesquisa.IsVisible = true;
+            }
+            else
+            {
+                idiomaParaPesquisa.IsVisible = false;
+            }
         }
     }
 }
