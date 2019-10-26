@@ -14,7 +14,7 @@ namespace MeuDicionario {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("MainPage.xaml")]
-    public partial class MainPage : global::Xamarin.Forms.CarouselPage {
+    public partial class MainPage : global::Xamarin.Forms.TabbedPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Xamarin.Forms.Entry txtPalavra;
@@ -26,13 +26,16 @@ namespace MeuDicionario {
         private global::Xamarin.Forms.Picker idiomaSelecionado;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        private global::Xamarin.Forms.CheckBox checkFiltroPorIdioma;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        private global::Xamarin.Forms.Picker idiomaParaPesquisa;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Xamarin.Forms.SearchBar txtPesquisa;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Xamarin.Forms.Label labelNenhumResultado;
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Xamarin.Forms.Grid gridResultadoPesquisa;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Xamarin.Forms.ListView listDicionario;
@@ -43,9 +46,10 @@ namespace MeuDicionario {
             txtPalavra = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Entry>(this, "txtPalavra");
             txtTraducao = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Entry>(this, "txtTraducao");
             idiomaSelecionado = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Picker>(this, "idiomaSelecionado");
+            checkFiltroPorIdioma = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.CheckBox>(this, "checkFiltroPorIdioma");
+            idiomaParaPesquisa = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Picker>(this, "idiomaParaPesquisa");
             txtPesquisa = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.SearchBar>(this, "txtPesquisa");
             labelNenhumResultado = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "labelNenhumResultado");
-            gridResultadoPesquisa = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Grid>(this, "gridResultadoPesquisa");
             listDicionario = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.ListView>(this, "listDicionario");
         }
     }
