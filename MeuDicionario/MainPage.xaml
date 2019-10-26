@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="MeuDicionario.MainPage">
+              xmlns:viewmodel="clr-namespace:MeuDicionario.ViewModel"
+              mc:Ignorable="d" x:Class="MeuDicionario.MainPage">
 
-    <CarouselPage.Children>
+    <TabbedPage.Children>
         
-        <ContentPage>
+        <ContentPage Title="Cadastro">
             <StackLayout Orientation="Vertical" Margin="10,10">
                 
                 <Label Text="Cadastro" 
@@ -17,24 +17,89 @@
                 <Entry Placeholder="Informe a palavra" Keyboard="Default" x:Name="txtPalavra"/>
                 <Entry Placeholder="Informe a tradução" Keyboard="Default" x:Name="txtTraducao"/>
 
+                <Picker x:Name="idiomaSelecionado">
+                    <Picker.Items>
+                        <x:String>Inglês</x:String>
+                        <x:String>Alemão</x:String>
+                        <x:String>Françês</x:String>
+                        <x:String>Grego</x:String>
+                    </Picker.Items>
+                </Picker>
+                
                 <Button Text="Gravar" Clicked="Button_Clicked"/>
             </StackLayout>
         </ContentPage>
         
-        <ContentPage Appearing="ContentPage_Appearing">
+        <ContentPage Appearing="ContentPage_Appearing" Title="Pesquisa">
+
             <StackLayout Orientation="Vertical" Margin="10,10">
+
+                <StackLayout Orientation="Horizontal">
+                    
+                    <CheckBox CheckedChanged="CheckBox_CheckedChanged" x:Name="checkFiltroPorIdioma"/>
+
+                    <Label Text="Filtrar por idioma" VerticalOptions="Center"
+                           FontSize="20" TextColor="Black"/>
+                    
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="10,10">
+
+                    <Picker x:Name="idiomaParaPesquisa" IsVisible="False" WidthRequest="250">
+                        <Picker.Items>
+                            <x:String>Selecione um idioma</x:String>
+                            <x:String>Inglês</x:String>
+                            <x:String>Alemão</x:String>
+                            <x:String>Françês</x:String>
+                            <x:String>Grego</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                </StackLayout>
+
+
+                <SearchBar Placeholder="Termo a pesquisar"
+                           x:Name="txtPesquisa" SearchButtonPressed="TxtPesquisa_SearchButtonPressed" />
                 
-                <Label Text="Pesquisa e tradução"
-                       FontSize="Title" TextColor="Black"/>
+                <Label Text="Nenhum resultado encontrado" 
+                       FontSize="Subtitle" x:Name="labelNenhumResultado" FontAttributes="Bold"/>
 
-                <SearchBar Placeholder="Pesquisar" x:Name="txtPesquisa" SearchButtonPressed="TxtPesquisa_SearchButtonPressed"/>
+                <ListView x:Name="listDicionario" ItemSelected="ListDicionario_ItemSelected" Margin="0,20,0,0" 
+                          RowHeight="60" HeightRequest="300"
+                          Refreshing="ListDicionario_Refreshing" IsPullToRefreshEnabled="True">
 
-                <ListView x:Name="listDicionario" SelectionMode="Single" 
-                          SeparatorColor="Transparent" RefreshControlColor="Transparent" InputTransparent="True"/>
+                    <ListView.ItemTemplate>
+                        
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Apagar" IsDestructive="True" Clicked="MenuItem_Clicked" CommandParameter="{Binding .}"/>
+                                </ViewCell.ContextActions>
+                                
+                                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="White">
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Palavra: " FontAttributes="Bold" WidthRequest="80"/>
+                                        <Label Text="{Binding Palavra}" TextColor="Blue" WidthRequest="90"/>
+                                        
+                                        <Label Text="Tradução: " FontAttributes="Bold" WidthRequest="100"/>
+                                        <Label Text="{Binding Traducao}" TextColor="Blue"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Idioma: " FontAttributes="Bold" WidthRequest="80"/>
+                                        <Label Text="{Binding Idioma}" TextColor="Blue"/>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
             </StackLayout>
         </ContentPage>
         
-    </CarouselPage.Children>
+    </TabbedPage.Children>
 
-</CarouselPage>
+</TabbedPage>

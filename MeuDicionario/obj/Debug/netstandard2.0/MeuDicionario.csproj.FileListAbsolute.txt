@@ -15,9 +15,11 @@ C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\bin\Debug\netstand
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\bin\Debug\netstandard2.0\MeuDicionario.pdb
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.csprojAssemblyReference.cache
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\Editar.xaml.g.cs
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.csproj.CoreCompileInputs.cache
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.AssemblyInfoInputs.cache
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.AssemblyInfo.cs
+C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.dll
 C:\Users\perei\Documents\Projetos\MeuDicionario\MeuDicionario\obj\Debug\netstandard2.0\MeuDicionario.pdb

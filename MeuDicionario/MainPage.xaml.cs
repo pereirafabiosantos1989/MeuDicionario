@@ -16,10 +16,10 @@ namespace MeuDicionario
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class MainPage : CarouselPage
+    public partial class MainPage : TabbedPage
     {
         /* As palavras e sua tradução */
-        List<Dicionario> dicionario = new List<Dicionario>();
+        List<Dicionario> dicionario;
         List<string> resultadoPesquisa = new List<string>();
 
         private SQLiteAsyncConnection _contexto;
@@ -28,23 +28,28 @@ namespace MeuDicionario
         {
             InitializeComponent();
 
-            listDicionario.ItemsSource = dicionario;
-
             _contexto = DependencyService.Get<IConexao>().RetornaConexao();
+
+            labelNenhumResultado.IsVisible = false;
+
+            /* inicializa os pickers */
+            idiomaSelecionado.SelectedIndex = 0;
+            idiomaParaPesquisa.SelectedIndex = 0;
         }
 
         public void LimparCampos()
         {
             txtPalavra.Text =
             txtTraducao.Text = string.Empty;
+            idiomaSelecionado.SelectedIndex = 0;
         }
 
-        public async void GravarNovaTraducao()
+        public async void GravarNovaTraducao(string palavra)
         {
             Dicionario novoItem = new Dicionario();
             novoItem.Palavra = txtPalavra.Text;
             novoItem.Traducao = txtTraducao.Text;
-            novoItem.Idioma = EnumIdiomas.Alemao;
+            novoItem.Idioma = idiomaSelecionado.SelectedItem.ToString();
 
             await _contexto.InsertAsync(novoItem);
             await DisplayAlert("Dicionário", $"A palavra {palavra.ToUpper()} foi adicionada ao dicionário.", "OK");
@@ -55,6 +60,7 @@ namespace MeuDicionario
         {
             string palavra = txtPalavra.Text;
             string traducao = txtTraducao.Text;
+            string idioma = idiomaSelecionado.SelectedItem.ToString();
 
             if (string.IsNullOrEmpty(palavra) || string.IsNullOrEmpty(traducao))
             {
@@ -62,41 +68,119 @@ namespace MeuDicionario
                 return;
             }
 
-            GravarNovaTraducao();
+            GravarNovaTraducao(palavra);
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
-            /* cria a tabela */
-            _contexto.CreateTableAsync<Dicionario>();
+            /* cria as tabelas se ainda não existirem */
+            await _contexto.CreateTableAsync<Dicionario>();
+            await _contexto.CreateTableAsync<Licao>();
 
             /* lista os dados do dicionário */
-            var dados = _contexto.Table<Dicionario>().ToListAsync();
+            dicionario = await _contexto.Table<Dicionario>().ToListAsync();
 
             base.OnAppearing();
+
+            labelNenhumResultado.IsVisible = false;
         }
 
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            listDicionario.ItemsSource = resultadoPesquisa;
+            ListarItens();
         }
 
-        private void TxtPesquisa_SearchButtonPressed(object sender, EventArgs e)
+        public async void ListarItens()
         {
-            List<string> exibir = new List<string>();
+            dicionario = await _contexto.Table<Dicionario>()
+                                        .OrderBy(x => x.Idioma)
+                                        .ToListAsync();
 
-            try
+            listDicionario.ItemsSource = dicionario;
+
+            labelNenhumResultado.IsVisible = false;
+        }
+
+        private async void TxtPesquisa_SearchButtonPressed(object sender, EventArgs e)
+        {
+            if (!checkFiltroPorIdioma.IsChecked)
             {
-                Dicionario resultado = dicionario.Where(x => x.Palavra.Contains(txtPesquisa.Text)).First();
-
-                exibir.Add(resultado.Traducao);
+                /* Pesquisa por palavra ou tradução (sem filtro de idioma) */
+                dicionario = await _contexto.Table<Dicionario>()
+                                             .Where(x => x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text))
+                                             .OrderBy(x => x.Idioma)
+                                             .ToListAsync();
             }
-            catch (InvalidOperationException)
+            else
             {
-                exibir.Add("Nenhuma tradução encontrada");
+                string idiomaSelecionado = idiomaParaPesquisa.SelectedItem.ToString();
+
+                if (idiomaParaPesquisa.SelectedIndex == 0)
+                {
+                    await DisplayAlert("Dicionário", "É necessário informar um idioma para o filtro de resultado.", "Cancelar");
+                    return;
+                }
+                else
+                {
+
+                    /* Pesquisa pelo idioma */
+
+                    dicionario = await _contexto.Table<Dicionario>()
+                                                 .Where(x => (x.Palavra.Contains(txtPesquisa.Text) || x.Traducao.Contains(txtPesquisa.Text)) && x.Idioma.Equals(idiomaSelecionado))
+                                                 .OrderBy(x => x.Palavra)
+                                                 .ToListAsync();
+                }
             }
 
-            listDicionario.ItemsSource = exibir;
+            listDicionario.ItemsSource = dicionario;
+
+            if (dicionario.Count == 0)
+            {
+                labelNenhumResultado.IsVisible = true;
+            }
+            else
+            {
+                labelNenhumResultado.IsVisible = false;
+            }
+        }
+
+        private void ListDicionario_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            
+        }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            MenuItem item = (MenuItem) sender;
+            
+            Dicionario itemSelecionado = item.CommandParameter as Dicionario;
+
+            bool apagarItem = await DisplayAlert("Apagar item", $"Deseja apagar o item '{itemSelecionado.Palavra}'?", "Sim", "Não");
+
+            if (apagarItem)
+            {
+                await _contexto.DeleteAsync(itemSelecionado);
+            }
+
+            ListarItens();
+        }
+
+        private void ListDicionario_Refreshing(object sender, EventArgs e)
+        {
+            ListarItens();
+            listDicionario.IsRefreshing = false;
+        }
+
+        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (checkFiltroPorIdioma.IsChecked)
+            {
+                idiomaParaPesquisa.IsVisible = true;
+            }
+            else
+            {
+                idiomaParaPesquisa.IsVisible = false;
+            }
         }
     }
 }
