@@ -193,8 +193,6 @@ namespace MeuDicionario
                                              .ToListAsync();
 
                 listDicionario.ItemsSource = dicionario;
-
-                labelNenhumResultado.IsVisible = false;
             }
             else
             {
@@ -204,9 +202,9 @@ namespace MeuDicionario
                                              .ToListAsync();
 
                 listDicionario.ItemsSource = dicionario;
-
-                labelNenhumResultado.IsVisible = false;
             }
+
+            labelNenhumResultado.IsVisible = dicionario.Count == 0; 
         }
 
         private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)

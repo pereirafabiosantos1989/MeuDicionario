@@ -63,30 +63,35 @@
                        FontSize="Subtitle" x:Name="labelNenhumResultado" FontAttributes="Bold"/>
 
                 <ListView x:Name="listDicionario" ItemSelected="ListDicionario_ItemSelected" Margin="0,20,0,0" 
-                          RowHeight="60" HeightRequest="300"
+                           HasUnevenRows="True"
                           Refreshing="ListDicionario_Refreshing" IsPullToRefreshEnabled="True">
 
                     <ListView.ItemTemplate>
                         
                         <DataTemplate>
+
                             <ViewCell>
+                                
                                 <ViewCell.ContextActions>
                                     <MenuItem Text="Apagar" IsDestructive="True" Clicked="MenuItem_Clicked" CommandParameter="{Binding .}"/>
                                 </ViewCell.ContextActions>
                                 
-                                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Style="{Binding estiloStack}">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Style="{Binding estiloStack}">
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Palavra: " FontAttributes="Bold" WidthRequest="60" TextColor="{Binding estiloLabelTitulo}"/>
-                                        <Label Text="{Binding Palavra}" TextColor="Blue" WidthRequest="90"/>
-
-                                        <Label Text="Tradução: " FontAttributes="Bold" WidthRequest="70" TextColor="{Binding estiloLabelTitulo}"/>
-                                        <Label Text="{Binding Traducao}" TextColor="Blue"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                    
+                                    <StackLayout Orientation="Vertical" Grid.Column="0">
+                                        <Label Text="{Binding Palavra}" TextColor="Black" FontAttributes="Italic" FontSize="14"/>
+                                        <Label Text="{Binding Traducao}" TextColor="Blue" FontSize="14"/>
                                     </StackLayout>
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Idioma: " FontAttributes="Bold" WidthRequest="60" TextColor="{Binding estiloLabelTitulo}"/>
-                                        <Label Text="{Binding Idioma}" TextColor="Blue"/>
+                                    <StackLayout Orientation="Vertical" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="EndAndExpand">
+                                        <Label Text="{Binding Idioma}" TextColor="Blue" FontAttributes="Bold" FontSize="14"/>
                                     </StackLayout>
 
                                 </StackLayout>
