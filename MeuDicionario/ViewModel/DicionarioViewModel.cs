@@ -1,11 +1,9 @@
 ﻿using MeuDicionario.Modelo;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MeuDicionario.ViewModel
 {
-    public class DicionarioViewModel //: INotifyPropertyChanged
+    public class DicionarioViewModel
     {
         public List<Dicionario> dicionario = new List<Dicionario>();
 
