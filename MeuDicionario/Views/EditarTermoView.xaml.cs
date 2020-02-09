@@ -100,5 +100,17 @@ namespace MeuDicionario.Views
                 await Navigation.PopAsync();
             }
         }
+
+        private async void Button_Clicked_1(object sender, System.EventArgs e)
+        {
+            string idiomaAtualizado = (string) pickerIdiomas.SelectedItem;
+
+            TermoAEditar.Palavra = txtPalavra.Text;
+            TermoAEditar.Traducao = txtTraducao.Text;
+            TermoAEditar.Idioma = idiomaAtualizado;
+
+            await _contexto.UpdateAsync(TermoAEditar);
+            await Navigation.PopAsync();
+        }
     }
 }
