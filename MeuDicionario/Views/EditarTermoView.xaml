@@ -33,7 +33,8 @@
 
         <Label Grid.Row="2" Grid.Column="0" Text="Idioma: " VerticalOptions="Center" FontAttributes="Bold" FontSize="18"/>
 
-        <Picker ItemsSource="{Binding Idiomas}" SelectedItem="{Binding IdiomaDoTermoAtual.Idioma}"
+        <Picker ItemsSource="{Binding Idiomas, Mode=TwoWay}" ItemDisplayBinding="{Binding Nome}"
+                SelectedItem="{Binding IdiomaDoTermoAtual.Nome, Mode=TwoWay}"
                 Grid.Row="2" Grid.Column="1" x:Name="pickerIdiomas"/>
         
         <Button Text="Atualizar" Visual="Material"

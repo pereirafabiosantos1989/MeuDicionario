@@ -4,14 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MeuDicionario.Views.CadastrarTermoView" Title="Cadastrar termo">
+             x:Class="MeuDicionario.Views.CadastrarIdiomaView" Title="Cadastrar novo idioma">
 
-    <StackLayout Padding="25">
-        <Entry Placeholder="Informe o termo" x:Name="txtTermo"/>
-        <Entry Placeholder="Informe a tradução" x:Name="txtTraducao"/>
-
-        <Label Text="Escolha o idioma"/>
-        <Picker ItemsSource="{Binding Idiomas, Mode=TwoWay}" ItemDisplayBinding="{Binding Nome}" x:Name="pickerIdioma"/>
+    <StackLayout Orientation="Vertical" Padding="25">
+        <Entry Placeholder="Informe o idioma" x:Name="txtIdioma"/>
         <Button Text="Gravar" Clicked="Button_Clicked"/>
     </StackLayout>
     

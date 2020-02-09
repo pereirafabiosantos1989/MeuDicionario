@@ -31,7 +31,8 @@
                        Text="Idioma" FontSize="14" FontAttributes="Bold"
                        VerticalOptions="Center" IsVisible="{Binding HabilitaFiltroIdioma, Mode=TwoWay}"/>
 
-                <Picker ItemsSource="{Binding Idiomas}" IsVisible="{Binding HabilitaFiltroIdioma, Mode=TwoWay}" 
+                <Picker ItemsSource="{Binding Idiomas, Mode=TwoWay}" ItemDisplayBinding="{Binding Nome}"
+                        IsVisible="{Binding HabilitaFiltroIdioma, Mode=TwoWay}" 
                         WidthRequest="200" x:Name="pickerIdioma" SelectedIndexChanged="pickerIdioma_SelectedIndexChanged"/>
 
             </StackLayout>

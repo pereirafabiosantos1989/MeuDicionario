@@ -76,17 +76,18 @@ namespace MeuDicionario.Views
             }
         }
 
-        public List<string> Idiomas
+        private List<Idioma> _idiomas;
+
+        public List<Idioma> Idiomas
         {
             get
             {
-                return new List<string>()
-                {
-                    "Alemão",
-                    "Francês",
-                    "Grego",
-                    "Inglês"
-                };
+                return _idiomas;
+            }
+            set
+            {
+                _idiomas = value;
+                OnPropertyChanged();
             }
         }
 
@@ -97,7 +98,13 @@ namespace MeuDicionario.Views
             this.BindingContext = this;
             _contexto = DependencyService.Get<IConexao>().RetornaConexao();
 
+            LerIdiomasCadastrados();
             PesquisarTermos();
+        }
+
+        public async void LerIdiomasCadastrados()
+        {
+            Idiomas = await _contexto.Table<Idioma>().ToListAsync();
         }
 
         private void Switch_Toggled(object sender, ToggledEventArgs e)
@@ -106,8 +113,8 @@ namespace MeuDicionario.Views
             {
                 HabilitaFiltroIdioma = true;
 
-                string idiomaSelecionado = (string) pickerIdioma.SelectedItem;
-                PesquisarTermos(idiomaSelecionado);
+                Idioma idiomaSelecionado = (Idioma) pickerIdioma.SelectedItem;
+                PesquisarTermos(idiomaSelecionado.Nome);
             }
             else
             {
@@ -155,22 +162,22 @@ namespace MeuDicionario.Views
 
         private void txtTermo_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string idiomaSelecionado = (string) pickerIdioma.SelectedItem;
-            PesquisarTermos(idiomaSelecionado);
+            Idioma idiomaSelecionado = (Idioma) pickerIdioma.SelectedItem;
+            PesquisarTermos(idiomaSelecionado.Nome);
         }
 
         private void pickerIdioma_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string idiomaSelecionado = (string) pickerIdioma.SelectedItem;
-            PesquisarTermos(idiomaSelecionado);
+            Idioma idiomaSelecionado = (Idioma) pickerIdioma.SelectedItem;
+            PesquisarTermos(idiomaSelecionado.Nome);
         }
 
         private void ListView_Refreshing(object sender, EventArgs e)
         {
             if (HabilitaFiltroIdioma)
             {
-                string idiomaSelecionado = (string) pickerIdioma.SelectedItem;   
-                PesquisarTermos(idiomaSelecionado);
+                Idioma idiomaSelecionado = (Idioma) pickerIdioma.SelectedItem;   
+                PesquisarTermos(idiomaSelecionado.Nome);
             }
             else
             {
@@ -185,7 +192,7 @@ namespace MeuDicionario.Views
             Dicionario termoParaEditar = (Dicionario) e.SelectedItem;
             Navigation.PushAsync(new EditarTermoView(termoParaEditar));
         }
-
+            
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
             PesquisarTermos(null, true);

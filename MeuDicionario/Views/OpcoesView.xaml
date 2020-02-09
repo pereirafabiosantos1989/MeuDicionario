@@ -7,6 +7,7 @@
              x:Class="MeuDicionario.Views.OpcoesView" Title="Meu dicionário">
 
     <StackLayout Padding="25">
+        <Button Text="Cadastrar novo idioma" Clicked="Button_Clicked_2"/>
         <Button Text="Cadastrar termo" Clicked="Button_Clicked"/>
         <Button Text="Pesquisar termo" Clicked="Button_Clicked_1"/>
     </StackLayout>
