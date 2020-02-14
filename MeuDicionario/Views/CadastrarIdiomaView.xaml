@@ -7,8 +7,13 @@
              x:Class="MeuDicionario.Views.CadastrarIdiomaView" Title="Cadastrar novo idioma">
 
     <StackLayout Orientation="Vertical" Padding="25">
-        <Entry Placeholder="Informe o idioma" x:Name="txtIdioma"/>
-        <Button Text="Gravar" Clicked="Button_Clicked"/>
+
+        <Entry Placeholder="Informe o idioma" 
+               Text="{Binding Idioma.Nome, Mode=TwoWay}"/>
+        
+        <Button Text="Gravar" 
+                Command="{Binding CadastrarIdiomaCommand}"/>
+        
     </StackLayout>
     
 </ContentPage>

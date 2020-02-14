@@ -1,6 +1,5 @@
-﻿using MeuDicionario.Interfaces;
-using MeuDicionario.Modelo;
-using SQLite;
+﻿using MeuDicionario.Modelo;
+using MeuDicionario.ViewModel;
 using System;
 
 using Xamarin.Forms;
@@ -11,34 +10,38 @@ namespace MeuDicionario.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CadastrarIdiomaView : ContentPage
     {
-        private SQLiteAsyncConnection _contexto;
-
         public CadastrarIdiomaView()
         {
             InitializeComponent();
 
-            _contexto = DependencyService.Get<IConexao>().RetornaConexao();
-            _contexto.CreateTableAsync<Idioma>();
+            this.BindingContext = new CadastrarIdiomaViewModel();
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            if (txtIdioma.Text != null && txtIdioma.Text.Length > 0)
-            {
-                Idioma novoIdioma = new Idioma()
-                {
-                    Nome = txtIdioma.Text
-                };
+            base.OnAppearing();
 
-                await _contexto.InsertAsync(novoIdioma);
-                await DisplayAlert("Cadastro de idioma", $"O idioma '{novoIdioma.Nome}' foi cadastrado.", "OK");
-                await Navigation.PopAsync();
-            }
-            else
+            /* se o idioma foi cadastrado fecha a tela */
+            MessagingCenter.Subscribe<Idioma>(this, "SucessoCadastrarNovoIdioma", 
+            async (msg) =>
             {
-                await DisplayAlert("Cadastro de idioma", "É necessário informar o nome do idioma", "OK");
-                return;
-            }
+                await DisplayAlert("Meu dicionário", $"O idioma {msg.Nome} foi cadastrado corretamente", "OK");
+                await Navigation.PopAsync();
+            });
+
+            MessagingCenter.Subscribe<Exception>(this, "ErroCadastrarNovoIdioma",
+            async (ex) =>
+            {
+                await DisplayAlert("Meu dicionário", ex.Message, "OK"); 
+            });
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<Idioma>(this, "SucessoCadastrarNovoIdioma");
+            MessagingCenter.Unsubscribe<Exception>(this, "ErroCadastrarNovoIdioma");
         }
     }
 }
