@@ -23,6 +23,9 @@ namespace MeuDicionario.ViewModel
             {
                 _nomeIdioma = value;
                 OnPropertyChanged();
+
+                /* fala para o comando verificar se pode habilitar ou não o botão */
+                ((Command)CadastrarIdiomaCommand).ChangeCanExecute();
             }
         }
 
@@ -41,7 +44,11 @@ namespace MeuDicionario.ViewModel
             _contexto = DependencyService.Get<IConexao>().RetornaConexao();
             _contexto.CreateTableAsync<Idioma>();
 
-            CadastrarIdiomaCommand = new Command(CadastrarIdioma);
+            CadastrarIdiomaCommand = new Command(CadastrarIdioma, 
+            () =>
+            {
+                return NomeIdioma!= null && NomeIdioma.Length > 0;
+            });
         }
 
         public async void CadastrarIdioma()
