@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace MeuDicionario.ViewModel
 {
-    public class BasePropertyChange : INotifyPropertyChanged
+    public class BasePropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

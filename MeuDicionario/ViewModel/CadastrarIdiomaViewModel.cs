@@ -7,20 +7,32 @@ using Xamarin.Forms;
 
 namespace MeuDicionario.ViewModel
 {
-    public class CadastrarIdiomaViewModel : BasePropertyChange
+    public class CadastrarIdiomaViewModel : BasePropertyChanged
     {
+        public ICommand CadastrarIdiomaCommand { get; private set; }
+
         private SQLiteAsyncConnection _contexto;
 
         private Idioma _novoIdioma;
+        private string _nomeIdioma;
+
+        public string NomeIdioma
+        {
+            get { return _nomeIdioma; }
+            set
+            {
+                _nomeIdioma = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Idioma NovoIdioma
         {
             get { return _novoIdioma; }
 
-            set 
-            { 
+            set
+            {
                 _novoIdioma = value;
-                OnPropertyChanged();
             }
         }
 
@@ -36,6 +48,9 @@ namespace MeuDicionario.ViewModel
         {
             try
             {
+                NovoIdioma = new Idioma();
+                NovoIdioma.Nome = NomeIdioma;
+
                 if (NovoIdioma != null && !string.IsNullOrEmpty(NovoIdioma.Nome))
                 {
                     await _contexto.InsertAsync(NovoIdioma);
@@ -51,7 +66,5 @@ namespace MeuDicionario.ViewModel
                 MessagingCenter.Send(new Exception(e1.Message), "ErroCadastrarNovoIdioma");
             }
         }
-
-        public ICommand CadastrarIdiomaCommand { get; set; }
     }
 }

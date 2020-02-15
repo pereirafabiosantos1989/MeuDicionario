@@ -4,15 +4,25 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:vm="clr-namespace:MeuDicionario.ViewModel"
              x:Class="MeuDicionario.Views.CadastrarTermoView" Title="Cadastrar termo">
 
+    <!-- Faz o Binding com a ViewModel -->
+    <ContentPage.BindingContext>
+        <vm:CadastrarTermoViewModel></vm:CadastrarTermoViewModel>
+    </ContentPage.BindingContext>
+    
     <StackLayout Padding="25">
+        
         <Entry Placeholder="Informe o termo" x:Name="txtTermo"/>
         <Entry Placeholder="Informe a tradução" x:Name="txtTraducao"/>
 
         <Label Text="Escolha o idioma"/>
-        <Picker ItemsSource="{Binding Idiomas, Mode=TwoWay}" ItemDisplayBinding="{Binding Nome}" x:Name="pickerIdioma"/>
-        <Button Text="Gravar" Clicked="Button_Clicked"/>
+        <Picker ItemsSource="{Binding Idiomas, Mode=TwoWay}" 
+                ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding IdiomaSelecionado, Mode=TwoWay}"/>
+
+        <Button Text="Gravar" Command="{Binding CadastrarTermoCommand}"/>
+        
     </StackLayout>
     
 </ContentPage>

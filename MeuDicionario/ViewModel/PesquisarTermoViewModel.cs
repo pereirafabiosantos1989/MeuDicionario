@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MeuDicionario.ViewModel
 {
-    public class PesquisarTermoViewModel : BasePropertyChange
+    public class PesquisarTermoViewModel : BasePropertyChanged
     {
 
     }

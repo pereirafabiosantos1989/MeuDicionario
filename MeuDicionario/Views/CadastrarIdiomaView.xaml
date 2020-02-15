@@ -9,7 +9,7 @@
     <StackLayout Orientation="Vertical" Padding="25">
 
         <Entry Placeholder="Informe o idioma" 
-               Text="{Binding Idioma.Nome, Mode=TwoWay}"/>
+               Text="{Binding NomeIdioma, Mode=TwoWay}"/>
         
         <Button Text="Gravar" 
                 Command="{Binding CadastrarIdiomaCommand}"/>

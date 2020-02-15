@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MeuDicionario.ViewModel
 {
-    public class EditarTermoViewModel : BasePropertyChange
+    public class EditarTermoViewModel : BasePropertyChanged
     {
 
     }

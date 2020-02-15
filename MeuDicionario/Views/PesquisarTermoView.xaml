@@ -7,12 +7,6 @@
              xmlns:local="clr-namespace:MeuDicionario"
              x:Class="MeuDicionario.Views.PesquisarTermoView" Title="Pesquisar termo" Appearing="ContentPage_Appearing">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:ConversorDeBoolean x:Key="converterBoolean"/>
-        </ResourceDictionary>    
-    </ContentPage.Resources>
-        
     <StackLayout VerticalOptions="Start" Padding="25" Orientation="Vertical">
 
             <StackLayout Orientation="Horizontal">

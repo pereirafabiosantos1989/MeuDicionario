@@ -7,9 +7,57 @@
              x:Class="MeuDicionario.Views.OpcoesView" Title="Meu dicionário">
 
     <StackLayout Padding="25">
-        <Button Text="Cadastrar novo idioma" Clicked="Button_Clicked_2"/>
-        <Button Text="Cadastrar termo" Clicked="Button_Clicked"/>
-        <Button Text="Pesquisar termo" Clicked="Button_Clicked_1"/>
+
+
+        <Frame Padding="0" BackgroundColor="Green">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Cadastrar novo idioma" BackgroundColor="White" Margin="0,1,1,1"
+                        Clicked="Button_Clicked_2" Grid.Column="1">
+
+                </Button>
+                
+            </Grid>
+
+        </Frame>
+
+
+        <Frame Padding="0" BackgroundColor="Blue">
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Text="Cadastrar termo" BackgroundColor="White" Margin="0,1,1,1"
+                        Clicked="Button_Clicked" Grid.Column="1"/>
+            
+            </Grid>
+        </Frame>
+
+
+        <Frame Padding="0" BackgroundColor="Purple">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Pesquisar termo" BackgroundColor="White" Margin="0,1,1,1"
+                    Clicked="Button_Clicked_1" Grid.Column="1"/>
+                
+            </Grid>
+
+        </Frame>
+
     </StackLayout>
 
 </ContentPage>

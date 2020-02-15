@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MeuDicionario.ViewModel
 {
-    public class DicionarioViewModel : BasePropertyChange
+    public class DicionarioViewModel : BasePropertyChanged
     {
         public List<Dicionario> dicionario = new List<Dicionario>();
 
