@@ -14,8 +14,8 @@
     
     <StackLayout Padding="25">
         
-        <Entry Placeholder="Informe o termo" x:Name="txtTermo"/>
-        <Entry Placeholder="Informe a tradução" x:Name="txtTraducao"/>
+        <Entry Placeholder="Informe o termo" Text="{Binding Termo}"/>
+        <Entry Placeholder="Informe a tradução" Text="{Binding Traducao}"/>
 
         <Label Text="Escolha o idioma"/>
         <Picker ItemsSource="{Binding Idiomas, Mode=TwoWay}" 
