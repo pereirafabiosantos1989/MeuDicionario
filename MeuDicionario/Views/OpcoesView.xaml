@@ -11,16 +11,20 @@
         <vm:OpcoesViewModel></vm:OpcoesViewModel>        
     </ContentPage.BindingContext>
 
-    <StackLayout Padding="15">
+    <StackLayout Padding="15" Orientation="Vertical">
+
+        <Label Text="Selecione uma opção abaixo" FontSize="16" FontAttributes="Bold"/>
+        <BoxView HorizontalOptions="Fill" Color="Gray" HeightRequest="1"/>
+        
         <ListView ItemsSource="{Binding ItensMenu}" SelectedItem="{Binding OpcaoSelecionada, Mode=TwoWay}"
-                  SeparatorVisibility="None" HasUnevenRows="True" RefreshControlColor="White">
+                  SeparatorVisibility="None" HasUnevenRows="True" RefreshControlColor="White" Margin="0,20,0,0">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout Orientation="Horizontal" Padding="5">
-                                <BoxView Color="{Binding CorItem}" WidthRequest="10"/>
+                                <BoxView Color="{Binding CorItem}" WidthRequest="5"/>
                                 <Label Text="{Binding TituloOpcao}" FontSize="16" FontAttributes="Italic" VerticalOptions="Center"/>
                                 <Image Source="avancar2.png" HorizontalOptions="EndAndExpand"/>
                             </StackLayout>
