@@ -4,59 +4,31 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:vm="clr-namespace:MeuDicionario.ViewModel"
              x:Class="MeuDicionario.Views.OpcoesView" Title="Meu dicionário">
 
-    <StackLayout Padding="25">
+    <ContentPage.BindingContext>
+        <vm:OpcoesViewModel></vm:OpcoesViewModel>        
+    </ContentPage.BindingContext>
 
+    <StackLayout Padding="15">
+        <ListView ItemsSource="{Binding ItensMenu}" SelectedItem="{Binding OpcaoSelecionada, Mode=TwoWay}"
+                  SeparatorVisibility="None" HasUnevenRows="True" RefreshControlColor="White">
 
-        <Frame Padding="0" BackgroundColor="Green">
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Text="Cadastrar novo idioma" BackgroundColor="White" Margin="0,1,1,1"
-                        Clicked="Button_Clicked_2" Grid.Column="1">
-
-                </Button>
-                
-            </Grid>
-
-        </Frame>
-
-
-        <Frame Padding="0" BackgroundColor="Blue">
-
-            <Grid>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <Button Text="Cadastrar termo" BackgroundColor="White" Margin="0,1,1,1"
-                        Clicked="Button_Clicked" Grid.Column="1"/>
-            
-            </Grid>
-        </Frame>
-
-
-        <Frame Padding="0" BackgroundColor="Purple">
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Text="Pesquisar termo" BackgroundColor="White" Margin="0,1,1,1"
-                    Clicked="Button_Clicked_1" Grid.Column="1"/>
-                
-            </Grid>
-
-        </Frame>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <BoxView Color="{Binding CorItem}" WidthRequest="10"/>
+                                <Label Text="{Binding TituloOpcao}" FontSize="16" FontAttributes="Italic" VerticalOptions="Center"/>
+                                <Image Source="avancar2.png" HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </StackLayout>
 

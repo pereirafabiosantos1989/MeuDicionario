@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿using MeuDicionario.Modelo;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,19 +12,33 @@ namespace MeuDicionario.Views
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            Navigation.PushAsync(new CadastrarTermoView());
+            base.OnAppearing();
+
+            MessagingCenter.Subscribe<Opcao>(this, "NavegarParaPagina",
+            (opcao) =>
+            {
+                if (opcao.TituloOpcao.Equals("Cadastrar idioma"))
+                {
+                    Navigation.PushAsync(new CadastrarIdiomaView());
+                }
+                else if (opcao.TituloOpcao.Equals("Cadastrar termo"))
+                {
+                    Navigation.PushAsync(new CadastrarTermoView());
+                }
+                else if (opcao.TituloOpcao.Equals("Pesquisar termo"))
+                {
+                    Navigation.PushAsync(new PesquisarTermoView());
+                }
+            });
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        protected override void OnDisappearing()
         {
-            Navigation.PushAsync(new PesquisarTermoView());
-        }
+            base.OnDisappearing();
 
-        private void Button_Clicked_2(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new CadastrarIdiomaView());
+            MessagingCenter.Unsubscribe<Opcao>(this, "NavegarParaPagina");
         }
     }
 }
