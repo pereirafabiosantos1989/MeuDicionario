@@ -13,11 +13,11 @@ namespace MeuDicionario.ViewModel
     {
 		public ICommand CadastrarTermoCommand { get; private set; }
 
+		private SQLiteAsyncConnection _contexto;
+
 		private string termo;
 		private string traducao;
 		private List<Idioma> _idiomas;
-
-		private SQLiteAsyncConnection _contexto;
 
 		public CadastrarTermoViewModel()
 		{
@@ -36,7 +36,6 @@ namespace MeuDicionario.ViewModel
 			});
 
 			_contexto = DependencyService.Get<IConexao>().RetornaConexao();
-			_contexto.CreateTableAsync<Dicionario>();
 
 			LerIdiomasCadastrados();
 		}

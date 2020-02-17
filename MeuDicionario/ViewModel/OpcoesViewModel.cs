@@ -1,12 +1,15 @@
-﻿using MeuDicionario.Modelo;
+﻿using MeuDicionario.Interfaces;
+using MeuDicionario.Modelo;
+using SQLite;
 using System.Collections.Generic;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MeuDicionario.ViewModel
 {
     public class OpcoesViewModel : BasePropertyChanged
     {
+        private SQLiteAsyncConnection _contexto;
+
         private List<Opcao> itensMenu;
 
         public List<Opcao> ItensMenu
@@ -35,6 +38,13 @@ namespace MeuDicionario.ViewModel
 
         public OpcoesViewModel()
         {
+            _contexto = DependencyService.Get<IConexao>().RetornaConexao();
+
+            /* cria as tabelas do banco de dados */
+            _contexto.CreateTableAsync<Dicionario>();
+            _contexto.CreateTableAsync<Idioma>();
+
+            /* preenche os menus */
             ItensMenu = new List<Opcao>()
             {
                 new Opcao(){ TituloOpcao = "Cadastrar idioma", CorItem = System.Drawing.Color.Green },
