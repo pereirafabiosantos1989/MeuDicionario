@@ -1,7 +1,5 @@
 ﻿using MeuDicionario.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MeuDicionario
 {
@@ -11,7 +9,7 @@ namespace MeuDicionario
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new OpcoesView());
+            MainPage = new HomeView();
         }
 
         protected override void OnStart()
