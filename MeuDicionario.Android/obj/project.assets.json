@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "MonoAndroid,Version=v9.0": {
+      "Refractored.FloatingActionButton/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Android.Support.v7.RecyclerView": "25.4.0.2"
+        },
+        "compile": {
+          "lib/MonoAndroid10/Refractored.Fab.dll": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/Refractored.Fab.dll": {}
+        }
+      },
       "sqlite-net-pcl/1.6.292": {
         "type": "package",
         "dependencies": {
@@ -916,6 +928,19 @@
     }
   },
   "libraries": {
+    "Refractored.FloatingActionButton/2.1.0": {
+      "sha512": "eT/4xmP50hIm38IqrORreZw0qYsoCCuDiAGVYPstgfAWwzfRthVe0/PlFC6yR4K5TB6dnSA8YZC40o/kQSujwg==",
+      "type": "package",
+      "path": "refractored.floatingactionbutton/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid10/Refractored.Fab.dll",
+        "lib/MonoAndroid10/Refractored.Fab.pdb",
+        "refractored.floatingactionbutton.2.1.0.nupkg.sha512",
+        "refractored.floatingactionbutton.nuspec"
+      ]
+    },
     "sqlite-net-pcl/1.6.292": {
       "sha512": "TZPs206/ZZXhDAgCzxE5Dmw1enkRmtpd1RKt+dLJA6Kvml4RxwkasRs4js2kijtGxik1SLCs39rh9nl9YFwrYg==",
       "type": "package",
@@ -2183,6 +2208,7 @@
   "projectFileDependencyGroups": {
     "MonoAndroid,Version=v9.0": [
       "MeuDicionario >= 1.0.0",
+      "Refractored.FloatingActionButton >= 2.1.0",
       "Xamarin.Android.Support.Core.Utils >= 28.0.0.3",
       "Xamarin.Android.Support.CustomTabs >= 28.0.0.3",
       "Xamarin.Android.Support.Design >= 28.0.0.3",
@@ -2237,6 +2263,10 @@
     "frameworks": {
       "monoandroid90": {
         "dependencies": {
+          "Refractored.FloatingActionButton": {
+            "target": "Package",
+            "version": "[2.1.0, )"
+          },
           "Xamarin.Android.Support.Core.Utils": {
             "target": "Package",
             "version": "[28.0.0.3, )"

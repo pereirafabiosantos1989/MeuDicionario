@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<view:MeuView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:vm="clr-namespace:MeuDicionario.ViewModel"
+             xmlns:view="clr-namespace:MeuDicionario.Modelo.Controles"
              x:Class="MeuDicionario.Views.PesquisarTermoView" Title="Pesquisar termo">
 
     <!-- Fazendo o BindingContext com a ViewModel -->
@@ -15,7 +16,7 @@
     <StackLayout VerticalOptions="Start" Padding="25" Orientation="Vertical">
 
         <StackLayout Orientation="Horizontal">
-
+            
             <!-- Filtro por idioma -->
             <Label Text="Filtrar por idioma" 
                        WidthRequest="120" FontSize="14" FontAttributes="Bold" 
@@ -40,43 +41,48 @@
 
         <StackLayout Orientation="Horizontal">
 
-            <Entry Placeholder="Informe o termo" 
+            <Entry Placeholder="Informe o termo" HorizontalTextAlignment="Center"
                    WidthRequest="250" Text="{Binding TermoAPesquisar, Mode=TwoWay}"/>
 
         </StackLayout>
 
-        <StackLayout Orientation="Vertical" Margin="0,20,0,0">
+
+        <StackLayout Orientation="Vertical" Margin="0,20,0,0" x:Name="stackLista">
 
             <Label Text="É necessário selecionar um idioma na lista" TextColor="Orange"
                    IsVisible="{Binding ErroNaPesquisaPorIdioma, Mode=TwoWay}" x:Name="lblErroNaPesquisaPorIdioma"/>
 
-            <ListView Header="Termos encontrados" 
-                      IsPullToRefreshEnabled="True"
+                <ListView Header="Termos encontrados" 
                       SeparatorColor="Gray"
                       SelectionMode="Single" SelectedItem="{Binding TermoSelecionado, Mode=TwoWay}"
                       ItemsSource="{Binding TermosEncontrados, Mode=TwoWay}">
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout Orientation="Vertical">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Vertical">
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding Palavra}" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
-                                        <Label Text="{Binding Idioma}" FontAttributes="Bold"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Palavra}" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                                            <Label Text="{Binding Idioma}" FontAttributes="Bold"/>
+                                        </StackLayout>
+
+                                        <Label Text="{Binding Traducao}" FontAttributes="Italic" TextColor="Blue"/>
                                     </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                                    <Label Text="{Binding Traducao}" FontAttributes="Italic" TextColor="Blue"/>
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
+            <!-- Aqui ficam os floating action button -->
+            <StackLayout x:Name="stackBotoes">
+                <view:MeuBotao Icone="Adicionar"/>
+            </StackLayout>
         </StackLayout>
+
 
     </StackLayout>
 
-</ContentPage>
+</view:MeuView>

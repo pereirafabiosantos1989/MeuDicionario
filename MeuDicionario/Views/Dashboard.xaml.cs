@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace MeuDicionario.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OpcoesView : ContentPage
+    public partial class Dashboard : ContentPage
     {
-        public OpcoesView()
+        public Dashboard()
         {
             InitializeComponent();
         }

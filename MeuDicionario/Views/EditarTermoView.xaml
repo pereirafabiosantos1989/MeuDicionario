@@ -30,7 +30,6 @@
         <Entry Text="{Binding TermoAEditar.Traducao}" FontAttributes="Bold" FontSize="16"
                Grid.Row="1" Grid.Column="1" x:Name="txtTraducao"/>
 
-
         <Label Grid.Row="2" Grid.Column="0" Text="Idioma: " VerticalOptions="Center" FontAttributes="Bold" FontSize="18"/>
 
         <Picker ItemsSource="{Binding Idiomas, Mode=TwoWay}" ItemDisplayBinding="{Binding Nome}"

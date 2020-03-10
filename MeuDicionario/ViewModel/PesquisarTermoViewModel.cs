@@ -2,6 +2,7 @@
 using MeuDicionario.Modelo;
 using SQLite;
 using System.Collections.Generic;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MeuDicionario.ViewModel
@@ -34,6 +35,11 @@ namespace MeuDicionario.ViewModel
 
         public PesquisarTermoViewModel()
         {
+            PesquisarCommand = new Command(() =>
+            {
+                Pesquisar();
+            });
+
             _contexto = DependencyService.Get<IConexao>().RetornaConexao();
             LerIdiomasCadastrados();
 
@@ -145,6 +151,8 @@ namespace MeuDicionario.ViewModel
                     Pesquisar();
             }
         }
+
+        private ICommand PesquisarCommand { get; set; }
 
         /// <summary>
         /// Efetua a pesuisa do termo informado no campo de texto

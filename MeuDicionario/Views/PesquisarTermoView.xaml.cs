@@ -1,11 +1,11 @@
 ﻿using MeuDicionario.Modelo;
+using MeuDicionario.Modelo.Controles;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MeuDicionario.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PesquisarTermoView : ContentPage
+    public partial class PesquisarTermoView : MeuView 
     {
         public PesquisarTermoView()
         {
@@ -21,6 +21,12 @@ namespace MeuDicionario.Views
             {
                 Navigation.PushAsync(new EditarTermoView(termo));
             });
+
+            MessagingCenter.Subscribe<Mensagem>(this, "BotaoListViewPressionado",
+            async (valor) =>
+            {
+                await DisplayActionSheet("Nova ação", "Cancelar", null, "Dashboard", "Cadastro de idioma", "Cadastro de termo");
+            });
         }
 
         protected override void OnDisappearing()
@@ -28,6 +34,7 @@ namespace MeuDicionario.Views
             base.OnDisappearing();
 
             MessagingCenter.Unsubscribe<Dicionario>(this, "TermoFoiSelecionado");
+            MessagingCenter.Unsubscribe<Mensagem>(this, "BotaoListViewPressionado");
         }
     }
 }

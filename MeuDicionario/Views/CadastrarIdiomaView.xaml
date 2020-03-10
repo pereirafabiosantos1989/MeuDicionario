@@ -11,8 +11,9 @@
         <Entry Placeholder="Informe o idioma" 
                Text="{Binding NomeIdioma, Mode=TwoWay}"/>
         
-        <Button Text="Gravar" 
-                Command="{Binding CadastrarIdiomaCommand}"/>
+        <ImageButton
+            Source="proximo.png"
+            Command="{Binding CadastrarIdiomaCommand}"/>
         
     </StackLayout>
     

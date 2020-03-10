@@ -26,7 +26,7 @@ namespace MeuDicionario.Views
             async (msg) =>
             {
                 await DisplayAlert("Meu dicionário", $"O idioma '{msg.Nome}' foi cadastrado corretamente", "OK");
-                await Navigation.PopAsync();
+                await Shell.Current.GoToAsync("///dashboard");
             });
 
             MessagingCenter.Subscribe<Exception>(this, "ErroCadastrarNovoIdioma",

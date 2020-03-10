@@ -1,25 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:view="clr-namespace:MeuDicionario.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MeuDicionario.Views.HomeView" Title="Meu dicionário">
+             x:Class="MeuDicionario.Views.HomeView">
 
-    <MasterDetailPage.Master>
-        <view:OpcoesView></view:OpcoesView>
-    </MasterDetailPage.Master>
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="150">
+                <Image Source="teste.png" Aspect="AspectFill" Opacity="0.6"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
+    <FlyoutItem Title="Dashboard" Route="dashboard">
+        <ShellContent ContentTemplate="{DataTemplate view:Dashboard}" Shell.BackgroundColor="Purple"/>
+    </FlyoutItem>
 
-    <MasterDetailPage.Detail>
-        <NavigationPage>
-            <x:Arguments>
-                <ContentPage Title="Meu dicionário">
-                    <StackLayout Padding="15">
-                        <Label Text="Selecione um item na lista ao lado" FontSize="Subtitle" FontAttributes="Bold"/>
-                    </StackLayout>
-                </ContentPage>
-            </x:Arguments>
-        </NavigationPage>
-    </MasterDetailPage.Detail>
-</MasterDetailPage>
+    <FlyoutItem Title="Cadastrar idioma" Icon="cadastrarIdioma.png">
+        <ShellContent ContentTemplate="{DataTemplate view:CadastrarIdiomaView}" Shell.BackgroundColor="Gray"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Cadastrar termo" Icon="cadastrarTermo.png">
+        <ShellContent ContentTemplate="{DataTemplate view:CadastrarTermoView}" Shell.BackgroundColor="Orange"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Pesquisar termo" Icon="pesquisarTermo.png">
+        <ShellContent ContentTemplate="{DataTemplate view:PesquisarTermoView}" Shell.UnselectedColor="Green"/>
+    </FlyoutItem>
+
+</Shell>

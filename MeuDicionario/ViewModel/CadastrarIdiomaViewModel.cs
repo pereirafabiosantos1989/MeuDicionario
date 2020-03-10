@@ -11,7 +11,7 @@ namespace MeuDicionario.ViewModel
     {
         public ICommand CadastrarIdiomaCommand { get; private set; }
 
-        private SQLiteAsyncConnection _contexto;
+        private readonly SQLiteAsyncConnection _contexto;
 
         private Idioma _novoIdioma;
         private string _nomeIdioma;
